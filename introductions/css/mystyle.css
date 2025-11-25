@@ -1,0 +1,46 @@
+body {
+  font-family: Arial;
+  background-color: #e6f3ff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  background: white;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #999;
+}
+
+h1 {
+  color: #003366;
+  border-bottom: 3px solid #003366;
+  padding-bottom: 5px;
+}
+
+h2 {
+  color: #004c99;
+  margin-top: 20px;
+  border-left: 6px solid #004c99;
+  padding-left: 10px;
+}
+
+p, li {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+ul {
+  background: #f2f9ff;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+img.profile-img {
+  width: 200px;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-shadow: 0 0 8px #888;
+}
