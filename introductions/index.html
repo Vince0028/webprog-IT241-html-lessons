@@ -1,55 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="css/mystyle.css">
-  <title>Personal Profile</title>
+  <link rel="stylesheet" href="css/css-grid.css">
+  <title>Personal Profile - Card View</title>
 </head>
 <body>
 
-  <h1>About Me</h1>
-  <p>
-    I study Information Technology at Asia Pacific College.  
-    I build apps, tools, and prototypes in web development and programming.  
-    I work with Python, Java, HTML, CSS, JavaScript, SQL, Arduino.
-  </p>
+  <div class="main-wrapper">
+    
+    <div class="header-section">
+      <div class="header-info">
+        <p><strong>Full Name:</strong> Vince Neilmar R Alabin</p>
+        <p><strong>Subject/Section:</strong> WEBPROG-IT241</p>
+      </div>
+      <div class="header-info">
+        <p><strong>Date:</strong> 11/28/2025</p>
+      </div>
+    </div>
 
-  <h2>Education</h2>
-  <ul>
-    <li>Asia Pacific College, BS Information Technology</li>
-    <li>Pasay City South High School, Junior and Senior High School, With Honors</li>
-    <li>R and O Academy, Elementary</li>
-  </ul>
+    <div class="card-grid">
 
-  <h2>Achievements</h2>
-  <ul>
-    <li>NC2 Animation Certificate, TESDA</li>
-  </ul>
+      <div class="card">
+        <h2>About Me</h2>
+        <img src="converted_image.png" class="profile-img">
+        <p>
+          I study Information Technology at Asia Pacific College.  
+          I build apps, tools, and prototypes in web development and programming.  
+          I work with Python, Java, HTML, CSS, JavaScript, SQL, Arduino.
+        </p>
+      </div>
 
-  <h2>IT Experience</h2>
-  <ul>
-    <li>Web apps for monitoring, risk checks, and workflow tools</li>
-    <li>Facial recognition for attendance</li>
-    <li>Voice assistant for seniors</li>
-    <li>Raspberry Pi alert system for driver focus</li>
-    <li>Smart light control with Arduino</li>
-  </ul>
+      <div class="card">
+        <h2>Education</h2>
+        <ul>
+          <li>Asia Pacific College, BS Information Technology</li>
+          <li>Pasay City South High School, Junior and Senior High School, With Honors</li>
+          <li>R and O Academy, Elementary</li>
+        </ul>
+        <br>
+        <h2>Achievements</h2>
+        <ul>
+          <li>NC2 Animation Certificate, TESDA</li>
+        </ul>
+      </div>
 
-  <h2>Skills</h2>
-  <ul>
-    <li>Programming</li>
-    <li>Video editing</li>
-    <li>Computer animation</li>
-    <li>Building small tech prototypes</li>
-  </ul>
+      <div class="card">
+        <h2>IT Experience</h2>
+        <ul>
+          <li>Web apps for monitoring, risk checks, and workflow tools</li>
+          <li>Facial recognition for attendance</li>
+          <li>Voice assistant for seniors</li>
+          <li>Raspberry Pi alert system for driver focus</li>
+          <li>Smart light control with Arduino</li>
+        </ul>
+      </div>
 
-  <h2>Goals</h2>
-  <p>
-    I aim to build stable software and hardware tools with real impact.  
-    I want to grow strong skills in development and automation.
-  </p>
+      <div class="card">
+        <h2>Skills & Goals</h2>
+        <p><strong>Skills:</strong></p>
+        <ul>
+          <li>Programming</li>
+          <li>Video editing</li>
+          <li>Computer animation</li>
+          <li>Building small tech prototypes</li>
+        </ul>
+        <br>
+        <p><strong>Goals:</strong></p>
+        <p>
+          I aim to build stable software and hardware tools with real impact.  
+          I want to grow strong skills in development and automation.
+        </p>
+      </div>
 
-  <h2>Picture Gallery</h2>
-  <img src="converted_image.png">
+      <div class="card">
+        <h2>Picture Gallery</h2>
+        <img src="converted_image.png" class="gallery-img">
+        <img src="converted_image.png" class="gallery-img">
+      </div>
+
+    </div> 
+  </div> 
 
 </body>
 </html>
