@@ -1,13 +1,32 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
 .container {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
   background-color: dodgerblue;
   padding: 10px;
+  gap: 10px;
 }
-.container div {
+
+.container > div {
   background-color: #f1f1f1;
   border: 1px solid black;
-  padding: 10px;
-  font-size: 30px;
-  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  text-align: left;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+h2 {
+  margin-top: 0;
+  border-bottom: 2px solid dodgerblue;
 }
