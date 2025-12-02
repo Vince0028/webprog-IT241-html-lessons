@@ -53,30 +53,25 @@
   <h2>Picture Gallery</h2>
   <img src="converted_image.png">
 
-<div class="container-fluid p-5 bg-primary text-white text-center">
-  <h1>My First Bootstrap Page</h1>
-  <p>Resize this responsive page to see the effect!</p> 
-</div>
   
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>Column 1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Column 2</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Column 3</h3>        
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-  </div>
+  <div class="container-fluid mt-3">
+<h1>Responsive Auto Layout Columns</h1>
+<p>In Bootstrap 5, there is an easy way to create equal width columns: just use the <code>.col-md</code> class on a specified number of col elements. Bootstrap will recognize how many columns there are, and each column will get the same width.</p>
+<p>If the screen size is <strong>less than 768px</strong>, the columns will stack horizontally.</p>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md bg-primary text-white">1 of 2</div>
+<div class="col-md bg-dark text-white">2 of 2</div>
+</div>  
 </div>
+<br>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md bg-primary text-white">1 of 4</div>
+<div class="col-md bg-dark text-white">2 of 4</div>
+<div class="col-md bg-primary text-white">3 of 4</div>
+<div class="col-md bg-dark text-white">4 of 4</div>
+</div>  
 
 </body>
 </html>
