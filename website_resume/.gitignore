@@ -1,4 +1,4 @@
-# Environment Variables
+
 .env
 .env.*
 .env.local
@@ -7,22 +7,22 @@
 .env.vercel
 *.env
 
-# Dependencies
+
 node_modules/
 website_resume/node_modules/
 
-# Build outputs
+
 dist/
 build/
 public/
 *.log
 *.tgz
 
-# Vercel
+
 .vercel
 .vercel.json
 
-# IDE / Editor
+
 .vscode/
 .idea/
 *.swp
@@ -31,20 +31,20 @@ public/
 .DS_Store
 Thumbs.db
 
-# API Keys and Secrets
+
 **/api-keys/
 **/secrets/
 *.pem
 *.key
 
-# Logs
+
 logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# OS Files
+
 .DS_Store
 .DS_Store?
 ._*
@@ -53,12 +53,12 @@ yarn-error.log*
 ehthumbs.db
 Thumbs.db
 
-# Temporary files
+
 *.tmp
 *.temp
 .cache/
 .temp/
 
-# Package manager files
+
 package-lock.json.backup
 yarn.lock.backup
