@@ -1,5 +1,6 @@
 {
   "type": "module",
+  "name": "alobin-resume-midterm",
   "scripts": {
     "start-api": "node servers/api-server.js"
   },
