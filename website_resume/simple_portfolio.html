@@ -14,7 +14,7 @@
       --border: #e5e7eb;
       --accent: #111827;
       --accent-light: #f3f4f6;
-    
+
       --resume-scale-start: 0.60;
       --resume-scale-15: 0.68;
       --resume-scale-35: 0.76;
@@ -213,7 +213,7 @@
         z-index: 12;
       }
 
-      
+
       15% {
         transform: translateX(-50%) translateY(-60%) rotate(90deg) scale(var(--resume-scale-15));
         opacity: 1;
@@ -225,24 +225,24 @@
         z-index: 12;
       }
 
-     
+
       35% {
         transform: translateX(-50%) translateY(-70%) rotate(90deg) scale(var(--resume-scale-35));
         z-index: 12;
       }
 
-      
+
       45% {
         z-index: 12;
       }
 
-     
+
       65% {
         transform: translateX(-50%) translateY(-70%) rotate(30deg) scale(var(--resume-scale-65));
         z-index: 12;
       }
 
-      
+
       100% {
         transform: translateX(-50%) translateY(var(--resume-translate-end)) rotate(0deg) scale(var(--resume-scale-end));
         opacity: 1;
@@ -318,7 +318,7 @@
         --resume-translate-end: -7%;
       }
 
-     
+
       .resume-card {
         top: 50%;
         transform: translateX(-50%) translateY(-50%) rotate(0deg) scale(var(--resume-scale-start));
@@ -645,147 +645,155 @@
         <div class="label-line">Applying for: Software Engineer</div>
       </div>
       <main class="page resume-card" aria-label="Simple portfolio" id="resumeCard">
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle actions">☰ Menu</button>
-      <div class="top-actions">
-        <a class="btn-link secondary" href="index.html?resume=1">Press to go to UI resume</a>
-        <button class="theme-btn" id="themeToggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
-      </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle actions">☰ Menu</button>
+        <div class="top-actions">
+          <a class="btn-link secondary" href="index.html?resume=1">Press to go to UI resume</a>
+          <button class="theme-btn" id="themeToggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+        </div>
 
-      <header class="header">
-        <div class="header-main">
-          <div class="avatar" role="img" aria-label="Vince Nelmar Alobin"></div>
-          <div>
-            <div class="name">Vince Nelmar Alobin</div>
-            <div class="role">BSIT Student • Web & App Projects</div>
-            <div class="contact-line">
-              <span>📧 alobinvince@gmail.com</span>
-              <span>📱 09480914634</span>
+        <header class="header">
+          <div class="header-main">
+            <div class="avatar" role="img" aria-label="Vince Nelmar Alobin"></div>
+            <div>
+              <div class="name">Vince Nelmar Alobin</div>
+              <div class="role">BSIT Student • Web & App Projects</div>
+              <div class="contact-line">
+                <span>📧 alobinvince@gmail.com</span>
+                <span>📱 09480914634</span>
+              </div>
             </div>
           </div>
+        </header>
+
+        <section class="section" aria-labelledby="summary-title">
+          <h2 id="summary-title">Summary</h2>
+          <p>Passionate IT student building practical web, app, and embedded projects. Focused on clear solutions,
+            reliable execution, and continuous learning.</p>
+        </section>
+
+        <section class="section" aria-labelledby="projects-title">
+          <h2 id="projects-title">Projects</h2>
+          <div class="two-column">
+            <a class="card card-link" href="#">
+              <div class="list-item">
+                <strong>Driver Expression Detector</strong>
+                <p>Detects yawns or lost focus and triggers a buzzer for safety.</p>
+              </div>
+              <div class="pill-row">
+                <span class="pill">Python</span>
+                <span class="pill">Raspberry Pi</span>
+              </div>
+            </a>
+            <a class="card card-link" href="https://denguetect.onrender.com" target="_blank" rel="noopener noreferrer">
+              <div class="list-item">
+                <strong>DengueTect</strong>
+                <p>Assesses dengue risk from symptoms and shares news updates.</p>
+              </div>
+              <div class="pill-row">
+                <span class="pill">Python</span>
+                <span class="pill">HTML/CSS/JS</span>
+                <span class="pill">SQL</span>
+              </div>
+            </a>
+            <a class="card card-link" href="https://student-monitor-student-portal.onrender.com" target="_blank"
+              rel="noopener noreferrer">
+              <div class="list-item">
+                <strong>Student Portal</strong>
+                <p>Classroom portal combining assignments, monitoring, and forms.</p>
+              </div>
+              <div class="pill-row">
+                <span class="pill">Python</span>
+                <span class="pill">HTML/CSS/JS</span>
+                <span class="pill">SQL</span>
+              </div>
+            </a>
+            <a class="card card-link" href="https://anilytics-rice-app.onrender.com" target="_blank"
+              rel="noopener noreferrer">
+              <div class="list-item">
+                <strong>AnaLytics</strong>
+                <p>Rice retailer app for waste tracking and online storefronts.</p>
+              </div>
+              <div class="pill-row">
+                <span class="pill">Python</span>
+                <span class="pill">HTML/CSS/JS</span>
+                <span class="pill">SQL</span>
+              </div>
+            </a>
+            <a class="card card-link" href="https://benpdf.onrender.com" target="_blank" rel="noopener noreferrer">
+              <div class="list-item">
+                <strong>benPDF</strong>
+                <p>Multi-tool converter for QR codes, binaries, and document formats.</p>
+              </div>
+              <div class="pill-row">
+                <span class="pill">Python</span>
+                <span class="pill">HTML/CSS/JS</span>
+                <span class="pill">Docker</span>
+              </div>
+            </a>
+            <a class="card card-link" href="#">
+              <div class="list-item">
+                <strong>SmartShut</strong>
+                <p>Arduino-based motion-aware lighting with warning buzzer.</p>
+              </div>
+              <div class="pill-row">
+                <span class="pill">Arduino</span>
+                <span class="pill">C/C++</span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="skills-title">
+          <h2 id="skills-title">Skills</h2>
+          <div class="pill-row">
+            <span class="pill">Web Development</span>
+            <span class="pill">Computer Programming</span>
+            <span class="pill">Computer Animation</span>
+            <span class="pill">Video Editing</span>
+            <span class="pill">Embedded Prototyping</span>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="languages-title">
+          <h2 id="languages-title">Programming Languages</h2>
+          <div class="pill-row">
+            <span class="pill">Python</span>
+            <span class="pill">JavaScript</span>
+            <span class="pill">Java</span>
+            <span class="pill">TypeScript</span>
+            <span class="pill">HTML/CSS</span>
+            <span class="pill">SQL</span>
+            <span class="pill">C/C++</span>
+            <span class="pill">Arduino</span>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="education-title">
+          <h2 id="education-title">Education</h2>
+          <div class="list-item">
+            <strong>Asia Pacific College (APC)</strong>
+            <p>BS Information Technology • 2024 - Present • Makati City, Philippines</p>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="cert-title">
+          <h2 id="cert-title">Certificate</h2>
+          <p>NC2 Certificate (TESDA)</p>
+        </section>
+
+        <section class="section" aria-labelledby="contact-title">
+          <h2 id="contact-title">Contact</h2>
+          <p>Email: alobinvince@gmail.com · Phone: 09480914634</p>
+        </section>
+
+        <div class="footer-actions"
+          style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem; text-align: center;">
+          <a href="resources.html" class="card-link"
+            style="color: var(--muted); font-size: 0.9rem; text-decoration: underline;">
+            Resources & Credits
+          </a>
         </div>
-      </header>
-
-      <section class="section" aria-labelledby="summary-title">
-        <h2 id="summary-title">Summary</h2>
-        <p>Passionate IT student building practical web, app, and embedded projects. Focused on clear solutions,
-          reliable execution, and continuous learning.</p>
-      </section>
-
-      <section class="section" aria-labelledby="projects-title">
-        <h2 id="projects-title">Projects</h2>
-        <div class="two-column">
-          <a class="card card-link" href="#">
-            <div class="list-item">
-              <strong>Driver Expression Detector</strong>
-              <p>Detects yawns or lost focus and triggers a buzzer for safety.</p>
-            </div>
-            <div class="pill-row">
-              <span class="pill">Python</span>
-              <span class="pill">Raspberry Pi</span>
-            </div>
-          </a>
-          <a class="card card-link" href="https://denguetect.onrender.com" target="_blank" rel="noopener noreferrer">
-            <div class="list-item">
-              <strong>DengueTect</strong>
-              <p>Assesses dengue risk from symptoms and shares news updates.</p>
-            </div>
-            <div class="pill-row">
-              <span class="pill">Python</span>
-              <span class="pill">HTML/CSS/JS</span>
-              <span class="pill">SQL</span>
-            </div>
-          </a>
-          <a class="card card-link" href="https://student-monitor-student-portal.onrender.com" target="_blank"
-            rel="noopener noreferrer">
-            <div class="list-item">
-              <strong>Student Portal</strong>
-              <p>Classroom portal combining assignments, monitoring, and forms.</p>
-            </div>
-            <div class="pill-row">
-              <span class="pill">Python</span>
-              <span class="pill">HTML/CSS/JS</span>
-              <span class="pill">SQL</span>
-            </div>
-          </a>
-          <a class="card card-link" href="https://anilytics-rice-app.onrender.com" target="_blank"
-            rel="noopener noreferrer">
-            <div class="list-item">
-              <strong>AnaLytics</strong>
-              <p>Rice retailer app for waste tracking and online storefronts.</p>
-            </div>
-            <div class="pill-row">
-              <span class="pill">Python</span>
-              <span class="pill">HTML/CSS/JS</span>
-              <span class="pill">SQL</span>
-            </div>
-          </a>
-          <a class="card card-link" href="https://benpdf.onrender.com" target="_blank" rel="noopener noreferrer">
-            <div class="list-item">
-              <strong>benPDF</strong>
-              <p>Multi-tool converter for QR codes, binaries, and document formats.</p>
-            </div>
-            <div class="pill-row">
-              <span class="pill">Python</span>
-              <span class="pill">HTML/CSS/JS</span>
-              <span class="pill">Docker</span>
-            </div>
-          </a>
-          <a class="card card-link" href="#">
-            <div class="list-item">
-              <strong>SmartShut</strong>
-              <p>Arduino-based motion-aware lighting with warning buzzer.</p>
-            </div>
-            <div class="pill-row">
-              <span class="pill">Arduino</span>
-              <span class="pill">C/C++</span>
-            </div>
-          </a>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="skills-title">
-        <h2 id="skills-title">Skills</h2>
-        <div class="pill-row">
-          <span class="pill">Web Development</span>
-          <span class="pill">Computer Programming</span>
-          <span class="pill">Computer Animation</span>
-          <span class="pill">Video Editing</span>
-          <span class="pill">Embedded Prototyping</span>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="languages-title">
-        <h2 id="languages-title">Programming Languages</h2>
-        <div class="pill-row">
-          <span class="pill">Python</span>
-          <span class="pill">JavaScript</span>
-          <span class="pill">Java</span>
-          <span class="pill">TypeScript</span>
-          <span class="pill">HTML/CSS</span>
-          <span class="pill">SQL</span>
-          <span class="pill">C/C++</span>
-          <span class="pill">Arduino</span>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="education-title">
-        <h2 id="education-title">Education</h2>
-        <div class="list-item">
-          <strong>Asia Pacific College (APC)</strong>
-          <p>BS Information Technology • 2024 - Present • Makati City, Philippines</p>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="cert-title">
-        <h2 id="cert-title">Certificate</h2>
-        <p>NC2 Certificate (TESDA)</p>
-      </section>
-
-      <section class="section" aria-labelledby="contact-title">
-        <h2 id="contact-title">Contact</h2>
-        <p>Email: alobinvince@gmail.com · Phone: 09480914634</p>
-      </section>
-    </main>
+      </main>
       <div class="envelope-front"></div>
       <div class="envelope-flap"></div>
       <div class="envelope-glow"></div>
