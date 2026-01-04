@@ -1,8 +1,4 @@
-easy git
+easy git very easy
 
-Miss kona siya
-
-
-miss
 
 
