@@ -3661,27 +3661,38 @@ body.light-mode .contrib-day.level-4 {
   padding: 1rem 0 2rem;
   -webkit-overflow-scrolling: touch;
   width: 100%;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+  scroll-snap-type: x mandatory;
+}
+
+.movies-track-container::-webkit-scrollbar {
+  display: none;
+  /* Chrome/Safari */
 }
 
 .movies-track {
   display: flex;
   gap: 1.5rem;
-  padding: 0 1rem;
+  padding: 0 max(1rem, calc(50% - 130px));
+  /* Center the first item */
   min-width: min-content;
-  /* Ensure items don't shrink */
 }
 
 .movie-slide {
-  flex: 0 0 200px;
-  /* Fixed width on mobile */
-  height: 300px;
-  border-radius: 12px;
+  flex: 0 0 260px;
+  /* Slightly wider for presentation feel */
+  height: 380px;
+  border-radius: 16px;
   background-size: cover;
   background-position: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease;
+  scroll-snap-align: center;
 }
 
 .movie-slide:hover {
@@ -3694,42 +3705,48 @@ body.light-mode .contrib-day.level-4 {
   left: 0;
   right: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7) 60%, transparent);
-  padding: 1.5rem 1rem 1rem;
+  padding: 2rem 1.5rem 1.5rem;
   color: white;
   transform: translateY(0);
 }
 
 .movie-title {
   font-weight: 700;
-  font-size: 1.1rem;
-  margin-bottom: 0.25rem;
+  font-size: 1.25rem;
+  margin-bottom: 0.35rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   white-space: normal;
-  /* Allow Title Wrapping */
   line-height: 1.2;
 }
 
 .movie-year {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--primary);
   font-weight: 600;
   margin-bottom: 0.25rem;
 }
 
 .movie-desc {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: #ccc;
   opacity: 0.9;
 }
 
 /* Desktop Styles */
 @media (min-width: 768px) {
+  .movies-track-container {
+    padding: 1rem 0;
+  }
+
   .movies-track {
     justify-content: center;
+    padding: 0 1rem;
+    scroll-snap-type: none;
   }
 
   .movie-slide {
     flex: 0 0 240px;
     height: 360px;
+    scroll-snap-align: none;
   }
 }
