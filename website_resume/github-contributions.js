@@ -28,35 +28,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     calendarEl.innerHTML = skeleton;
   }
 
-  const cacheKey = 'gh_contribs_' + username;
-  let cachedData = null;
-  
-  try {
-    const cached = localStorage.getItem(cacheKey);
-    if (cached) {
-      const parsed = JSON.parse(cached);
-      if (parsed && parsed.ts && Date.now() - parsed.ts < 12 * 60 * 60 * 1000 && parsed.html) {
-        calendarEl.innerHTML = parsed.html;
-        cachedData = parsed;
-        setTimeout(() => {
-          fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`, { signal: AbortSignal.timeout(5000) }).then(r => r.json()).then(data => {
-            if (data && data.contributions && JSON.stringify(data) !== JSON.stringify(parsed.data)) {
-              location.reload();
-            }
-          }).catch(() => {});
-        }, 2000);
-        return;
-      }
-    }
-  } catch (e) { }
-
-  renderSkeleton();
-
-  try {
-    const resp = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`, { signal: AbortSignal.timeout(6000) });
-    if (!resp.ok) throw new Error('Network error');
-    const data = await resp.json();
-    if (!data || !data.contributions) throw new Error('No data');
+  function renderCalendar(data) {
+    if (!data || !data.contributions) return;
 
     const contributions = data.contributions.slice();
     const totalContributions = data.total ? data.total[Object.keys(data.total)[0]] : 0;
@@ -74,8 +47,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const weeks = [];
     let week = [];
     contributions.forEach((d, idx) => {
-      const dt = new Date(d.date);
-      const dow = dt.getDay();
+      const dow = new Date(d.date).getDay();
       week[dow] = d;
       if (dow === 6 || idx === contributions.length - 1) {
         weeks.push(week.slice());
@@ -114,20 +86,19 @@ document.addEventListener('DOMContentLoaded', async function () {
     html += `</div>`;
 
     html += `<div class="contrib-grid">`;
-    
-    // Calculate max contribution for proper level distribution
+
     let maxContribution = 0;
     contributions.forEach(d => {
       if (d.count > maxContribution) maxContribution = d.count;
     });
-    
+
     const levelThresholds = [0];
     if (maxContribution > 0) {
       levelThresholds.push(Math.ceil(maxContribution * 0.25));
       levelThresholds.push(Math.ceil(maxContribution * 0.5));
       levelThresholds.push(Math.ceil(maxContribution * 0.75));
     }
-    
+
     weeks.forEach(w => {
       html += `<div class="contrib-week">`;
       for (let i = 0; i < 7; i++) {
@@ -147,7 +118,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       }
       html += `</div>`;
     });
-    html += `</div>`;
+    html += `</div>`; // .contrib-grid
 
     html += `<div class="contrib-legend">`;
     html += `<span>Less</span>`;
@@ -157,22 +128,67 @@ document.addEventListener('DOMContentLoaded', async function () {
     html += `<div class="contrib-day level-3"></div>`;
     html += `<div class="contrib-day level-4"></div>`;
     html += `<span>More</span>`;
-    html += `</div>`;
+    html += `</div>`; // .contrib-legend
 
-    html += `</div>`;
+    html += `</div>`; // .contrib-calendar
 
     calendarEl.innerHTML = html;
-
-    try { localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), html, data })); } catch (e) { }
-
-  } catch (err) {
-    console.error('Error loading GitHub contributions:', err);
-    const header = calendarEl.querySelector('.contrib-header');
-    if (header) {
-      header.textContent = 'Contributions unavailable (Network/API Error)';
-      header.style.color = '#ff6b6b';
-    }
   }
+
+  const cacheKey = 'gh_contribs_' + username;
+  let cachedData = null;
+
+  // 1. Try to load from cache first
+  try {
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      // Valid if less than 12 hours old
+      if (parsed && parsed.ts && Date.now() - parsed.ts < 12 * 60 * 60 * 1000 && parsed.data) {
+        cachedData = parsed.data;
+        renderCalendar(cachedData);
+      }
+    }
+  } catch (e) {
+    console.warn('Cache read error', e);
+  }
+
+  // 2. If no cache was rendered, show skeleton
+  if (!cachedData) {
+    renderSkeleton();
+  }
+
+  // 3. Fetch fresh data regardless (to update in background or initial load)
+  // Delay slightly to prioritize main thread for other animations
+  setTimeout(async () => {
+    try {
+      const resp = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`, { signal: AbortSignal.timeout(6000) });
+      if (!resp.ok) throw new Error('Network error');
+      const data = await resp.json();
+      if (!data || !data.contributions) throw new Error('No data');
+
+      // Check if we need to update
+      const needsUpdate = !cachedData || JSON.stringify(data) !== JSON.stringify(cachedData);
+
+      if (needsUpdate) {
+        console.log('GitHub contributions updated');
+        renderCalendar(data);
+        // Update cache
+        try {
+          localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data }));
+        } catch (e) { }
+      }
+    } catch (err) {
+      console.error('Error fetching GitHub contributions:', err);
+      // Only show error if we haven't shown anything yet
+      if (!cachedData) {
+        if (calendarEl.querySelector('.contrib-header')) {
+          calendarEl.querySelector('.contrib-header').textContent = 'Contributions unavailable (Network/API Error)';
+          calendarEl.querySelector('.contrib-header').style.color = '#ff6b6b';
+        }
+      }
+    }
+  }, cachedData ? 2000 : 0); // If we have cache, delay fetch longer. If not, fetch immediately (0ms delay but next tick).
 });
 
 
