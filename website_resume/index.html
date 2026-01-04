@@ -564,22 +564,7 @@
             </form>
           </div>
 
-          <div class="guestbook-messages">
-            <div v-if="messages.length === 0" class="text-center text-secondary mt-3">
-              <p>No messages yet. Be the first!</p>
-            </div>
-            <transition-group name="list" tag="div">
-              <div v-for="msg in messages" :key="msg.id" class="message-card">
-                <div class="message-header">
-                  <span class="message-author">{{ msg.name }}</span>
-                  <span class="message-date">{{ msg.date }}</span>
-                </div>
-                <p class="message-content">{{ msg.message }}</p>
-                <!-- Optional delete button for demo purposes -->
-                <!-- <button class="btn btn-sm btn-outline-danger mt-2" @click="deleteMessage(msg.id)">Delete</button> -->
-              </div>
-            </transition-group>
-          </div>
+
         </div>
 
   </div>

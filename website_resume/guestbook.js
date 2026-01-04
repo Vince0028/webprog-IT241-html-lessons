@@ -34,15 +34,6 @@ const guestbookApp = Vue.createApp({
                     throw new Error(result.error + (result.details ? ': ' + result.details : ''));
                 }
 
-                // Add to local list for immediate feedback
-                const newMessage = {
-                    id: Date.now(),
-                    name: this.visitorName,
-                    message: this.visitorMessage,
-                    date: new Date().toISOString().split('T')[0]
-                };
-                this.messages.unshift(newMessage);
-
                 // Reset form
                 this.visitorName = '';
                 this.visitorEmail = '';
