@@ -1,6 +1,4 @@
 {
-  "buildCommand": "bash config/vercel-build.sh",
-  "outputDirectory": "public",
   "rewrites": [
     {
       "source": "/api/:path*",
