@@ -30,7 +30,9 @@ const guestbookApp = Vue.createApp({
 
                 const result = await response.json();
 
-                if (!response.ok) throw new Error(result.error || 'Failed to send');
+                if (!response.ok) {
+                    throw new Error(result.error + (result.details ? ': ' + result.details : ''));
+                }
 
                 // Add to local list for immediate feedback
                 const newMessage = {
