@@ -92,9 +92,9 @@ export default async function handler(req, res) {
 Profile:
 Name: Vince Nelmar Pega Alobin
 Role: BSIT student, Asia Pacific College, second year
-Age: 20 years old
+Age: 19 years old
 City: Pasay City, Philippines
-Parents: Nelmar Alobin (father), Rosemarie Pega-Alobin (mother)
+Parents: Nelson Alobin Jr. (father), Maria Lourdes P. Alobin (mother)
 Email: alobinvince@gmail.com
 Phone: 09480914634
 Skills: JavaScript, Python, HTML, CSS, Java, SQL, web development, animation, video editing, data analysis, Microsoft Excel, Adobe InDesign
@@ -146,9 +146,9 @@ No lengthy explanations - answer directly and stop.`,
 Profile:
 Pangalan: Vince Nelmar Pega Alobin
 Tungkulin: BSIT student, Asia Pacific College, ikalawang taon
-Edad: 20 taong gulang
+Edad: 19 taong gulang
 Lungsod: Pasay City, Philippines
-Mga Magulang: Nelmar Alobin (ama), Rosemarie Pega-Alobin (ina)
+Mga Magulang: Nelson Alobin Jr. (ama), Maria Lourdes P. Alobin (ina)
 Email: alobinvince@gmail.com
 Phone: 09480914634
 Skills: JavaScript, Python, HTML, CSS, Java, SQL, web development, animation, video editing, data analysis, Microsoft Excel, Adobe InDesign
@@ -200,9 +200,9 @@ Gumamit ng mga salitang: kasi, talaga, lang, naman, po, alam mo, ganun, diba, si
 Profile:
 Name: Vince Nelmar Pega Alobin
 Role: BSIT student, Asia Pacific College, second year
-Age: 20 years old
+Age: 19 years old
 City: Pasay City, Philippines
-Parents: Nelmar Alobin (father), Rosemarie Pega-Alobin (mother)
+Parents: Nelson Alobin Jr. (father), Maria Lourdes P. Alobin (mother)
 Email: alobinvince@gmail.com
 Phone: 09480914634
 Skills: JavaScript, Python, HTML, CSS, Java, SQL, web development, animation, video editing, data analysis, Microsoft Excel, Adobe InDesign
