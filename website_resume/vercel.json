@@ -1,16 +1,28 @@
 {
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
+      "source": "/api/(.*)",
+      "destination": "https://vercel-ai-chatbot-rho.vercel.app/api/$1"
     },
     {
       "source": "/resume",
-      "destination": "/index.html"
+      "destination": "/html/index.html"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/html/index.html"
+    },
+    {
+      "source": "/resources.html",
+      "destination": "/html/resources.html"
+    },
+    {
+      "source": "/simple_portfolio.html",
+      "destination": "/html/simple_portfolio.html"
     },
     {
       "source": "/",
-      "destination": "/simple_portfolio.html"
+      "destination": "/html/simple_portfolio.html"
     }
   ]
 }

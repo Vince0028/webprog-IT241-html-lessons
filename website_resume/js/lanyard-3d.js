@@ -21,7 +21,7 @@
 
 		document.body.classList.add('has-3d-lanyard');
 
-		
+
 		const warningMsg = document.createElement('div');
 		const warningBaseText = "don't press me";
 		let warningResetTimer = null;
@@ -62,10 +62,10 @@
 			);
 		}
 
-		const frontTex = load('Images/Lanyard_pokemon.png');
-		const frontTexShy = load('Images/lanyard_shy.png');
-		const frontTexDizzy = load('Images/Lanyard_dizzy.png');
-		const backTex = load('Images/Back_pokemon.png');
+		const frontTex = load('../Images/Lanyard_pokemon.png');
+		const frontTexShy = load('../Images/lanyard_shy.png');
+		const frontTexDizzy = load('../Images/Lanyard_dizzy.png');
+		const backTex = load('../Images/Back_pokemon.png');
 
 		[frontTex, frontTexShy, frontTexDizzy, backTex].forEach(t => {
 			if (t) {
@@ -105,7 +105,7 @@
 				spinRemaining = 2 * Math.PI;
 				dizzyDuration = 2.5;
 
-				
+
 				console.log('Changing text to dizzy message');
 				warningMsg.textContent = 'Nakaka-hilo talaga pag pina ikot-ikot ka lang nya';
 				if (warningResetTimer) { clearTimeout(warningResetTimer); }
@@ -171,7 +171,7 @@
 				cardGroup.rotation.y += step;
 				spinRemaining -= step;
 			}
-			
+
 			if (dizzyDuration > 0) {
 				dizzyDuration -= dt;
 				if (dizzyDuration > 0) {
@@ -182,7 +182,7 @@
 					matFront.needsUpdate = true;
 				}
 			}
-			
+
 			renderer.render(scene, camera);
 			requestAnimationFrame(loop);
 		}

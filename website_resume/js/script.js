@@ -63,7 +63,7 @@ if (certImg && imgFrame) {
 		});
 	}
 }
-let vantaNetEffect = null; let vantaRingsEffect = null; const savedTheme = localStorage.getItem('theme'); const isLightMode = savedTheme === 'light'; const initialBgColor = isLightMode ? 0xf8fafc : 0x0a0e27; document.addEventListener('DOMContentLoaded', function () { if (window.VANTA && window.VANTA.NET) { vantaNetEffect = VANTA.NET({ el: "#vanta-bg", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00, color: 0x6366f1, backgroundColor: initialBgColor, points: 10, maxDistance: 20, spacing: 15, showDots: true }); } if (window.VANTA && window.VANTA.RINGS) { vantaRingsEffect = VANTA.RINGS({ el: "#hero-vanta-bg", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00, color: 0x6366f1, backgroundColor: initialBgColor, backgroundAlpha: 1 }); } }); const skills = [{ name: 'JavaScript', src: 'Images/javascript.png' }, { name: 'Python', src: 'Images/python.png' }, { name: 'HTML', src: 'Images/html.png' }, { name: 'Java', src: 'Images/java.png' }, { name: 'SQL', src: 'Images/sql.png' }, { name: 'CSS', src: 'Images/css.png' }]; console.log('Skills array loaded', skills.length); function populateRightCarousel(elementId, skillsArray, offset = 0) { const carousel = document.getElementById(elementId); if (!carousel) { console.error('Carousel element not found:', elementId); return; } const multiplied = []; for (let i = 0; i < 9; i++) { multiplied.push(...skillsArray); } console.log('Populating carousel', elementId, 'with', multiplied.length, 'items'); let startIndex = (offset * 2) % multiplied.length; multiplied.forEach((skill, index) => { const actualIndex = (startIndex + index) % multiplied.length; const actualSkill = multiplied[actualIndex]; const card = document.createElement('div'); card.className = 'skill-card-right'; const img = document.createElement('img'); img.src = actualSkill.src; img.alt = actualSkill.name; img.className = 'skill-icon-right'; img.onload = function () { console.log('Loaded:', actualSkill.name); }; img.onerror = function () { console.error('Failed to load image:', actualSkill.src); }; const nameDiv = document.createElement('div'); nameDiv.className = 'skill-name-right'; nameDiv.textContent = actualSkill.name; card.appendChild(img); card.appendChild(nameDiv); carousel.appendChild(card); }); console.log('Total cards in', elementId, ':', carousel.children.length); } populateRightCarousel('carouselRight1', skills, 0); populateRightCarousel('carouselRight2', skills, 1); populateRightCarousel('carouselRight3', skills, 2); const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }; const currentDateElement = document.getElementById('currentDate'); if (currentDateElement) { currentDateElement.textContent = new Date().toLocaleDateString('en-US', options); } const themeToggle = document.getElementById('themeToggle'); const body = document.body; if (isLightMode) { body.classList.add('light-mode'); themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i><span>Dark Mode</span>'; } themeToggle.addEventListener('click', () => { body.classList.toggle('light-mode'); if (body.classList.contains('light-mode')) { themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i><span>Dark Mode</span>'; localStorage.setItem('theme', 'light'); if (vantaNetEffect) { vantaNetEffect.setOptions({ color: 0x6366f1, backgroundColor: 0xf8fafc }); } if (vantaRingsEffect) { vantaRingsEffect.setOptions({ color: 0x6366f1, backgroundColor: 0xf8fafc }); } } else { themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i><span>Light Mode</span>'; localStorage.setItem('theme', 'dark'); if (vantaNetEffect) { vantaNetEffect.setOptions({ color: 0x6366f1, backgroundColor: 0x0a0e27 }); } if (vantaRingsEffect) { vantaRingsEffect.setOptions({ color: 0x6366f1, backgroundColor: 0x0a0e27 }); } } }); const mobileToggle = document.getElementById('mobileToggle'); const sidebar = document.getElementById('sidebar'); mobileToggle.addEventListener('click', () => { sidebar.classList.toggle('active'); if (sidebar.classList.contains('active')) { document.body.style.overflow = 'hidden'; document.body.classList.add('sidebar-open'); } else { document.body.style.overflow = ''; document.body.classList.remove('sidebar-open'); } }); const navLinks = document.querySelectorAll('.nav-item-custom'); navLinks.forEach(link => { link.addEventListener('click', () => { if (window.innerWidth <= 991) { sidebar.classList.remove('active'); document.body.style.overflow = ''; document.body.classList.remove('sidebar-open'); } }); }); document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }); }); document.querySelectorAll('.expertise-header').forEach(header => { header.addEventListener('click', function () { const dropdown = this.parentElement; const wasOpen = dropdown.classList.contains('open'); document.querySelectorAll('.expertise-dropdown').forEach(d => { d.classList.remove('open'); }); if (!wasOpen) { dropdown.classList.add('open'); } }); }); const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }; const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } }); }, observerOptions); document.querySelectorAll('.fade-in').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; observer.observe(el); }); const mobileObserverOptions = { threshold: 0.1, rootMargin: '0px' }; const mobileObserver = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting && window.innerWidth <= 991) { entry.target.classList.add('mobile-visible'); console.log('Right sidebar visible on mobile'); mobileObserver.unobserve(entry.target); } }); }, mobileObserverOptions); const rightSidebar = document.querySelector('.right-sidebar'); if (rightSidebar) { console.log('Right sidebar found, observing...'); mobileObserver.observe(rightSidebar); setTimeout(() => { if (window.innerWidth <= 991 && !rightSidebar.classList.contains('mobile-visible')) { console.log('Fallback trigger for mobile sidebar'); rightSidebar.classList.add('mobile-visible'); } }, 1000); } const projectObserver = new IntersectionObserver((entries) => { entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('project-visible'); }, index * 150); projectObserver.unobserve(entry.target); } }); }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' }); document.querySelectorAll('.expertise-item').forEach(item => { projectObserver.observe(item); });
+let vantaNetEffect = null; let vantaRingsEffect = null; const savedTheme = localStorage.getItem('theme'); const isLightMode = savedTheme === 'light'; const initialBgColor = isLightMode ? 0xf8fafc : 0x0a0e27; document.addEventListener('DOMContentLoaded', function () { if (window.VANTA && window.VANTA.NET) { vantaNetEffect = VANTA.NET({ el: "#vanta-bg", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00, color: 0x6366f1, backgroundColor: initialBgColor, points: 10, maxDistance: 20, spacing: 15, showDots: true }); } if (window.VANTA && window.VANTA.RINGS) { vantaRingsEffect = VANTA.RINGS({ el: "#hero-vanta-bg", mouseControls: true, touchControls: true, gyroControls: false, minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00, color: 0x6366f1, backgroundColor: initialBgColor, backgroundAlpha: 1 }); } }); const skills = [{ name: 'JavaScript', src: '../Images/javascript.png' }, { name: 'Python', src: '../Images/python.png' }, { name: 'HTML', src: '../Images/html.png' }, { name: 'Java', src: '../Images/java.png' }, { name: 'SQL', src: '../Images/sql.png' }, { name: 'CSS', src: '../Images/css.png' }]; console.log('Skills array loaded', skills.length); function populateRightCarousel(elementId, skillsArray, offset = 0) { const carousel = document.getElementById(elementId); if (!carousel) { console.error('Carousel element not found:', elementId); return; } const multiplied = []; for (let i = 0; i < 9; i++) { multiplied.push(...skillsArray); } console.log('Populating carousel', elementId, 'with', multiplied.length, 'items'); let startIndex = (offset * 2) % multiplied.length; multiplied.forEach((skill, index) => { const actualIndex = (startIndex + index) % multiplied.length; const actualSkill = multiplied[actualIndex]; const card = document.createElement('div'); card.className = 'skill-card-right'; const img = document.createElement('img'); img.src = actualSkill.src; img.alt = actualSkill.name; img.className = 'skill-icon-right'; img.onload = function () { console.log('Loaded:', actualSkill.name); }; img.onerror = function () { console.error('Failed to load image:', actualSkill.src); }; const nameDiv = document.createElement('div'); nameDiv.className = 'skill-name-right'; nameDiv.textContent = actualSkill.name; card.appendChild(img); card.appendChild(nameDiv); carousel.appendChild(card); }); console.log('Total cards in', elementId, ':', carousel.children.length); } populateRightCarousel('carouselRight1', skills, 0); populateRightCarousel('carouselRight2', skills, 1); populateRightCarousel('carouselRight3', skills, 2); const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }; const currentDateElement = document.getElementById('currentDate'); if (currentDateElement) { currentDateElement.textContent = new Date().toLocaleDateString('en-US', options); } const themeToggle = document.getElementById('themeToggle'); const body = document.body; if (isLightMode) { body.classList.add('light-mode'); themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i><span>Dark Mode</span>'; } themeToggle.addEventListener('click', () => { body.classList.toggle('light-mode'); if (body.classList.contains('light-mode')) { themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i><span>Dark Mode</span>'; localStorage.setItem('theme', 'light'); if (vantaNetEffect) { vantaNetEffect.setOptions({ color: 0x6366f1, backgroundColor: 0xf8fafc }); } if (vantaRingsEffect) { vantaRingsEffect.setOptions({ color: 0x6366f1, backgroundColor: 0xf8fafc }); } } else { themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i><span>Light Mode</span>'; localStorage.setItem('theme', 'dark'); if (vantaNetEffect) { vantaNetEffect.setOptions({ color: 0x6366f1, backgroundColor: 0x0a0e27 }); } if (vantaRingsEffect) { vantaRingsEffect.setOptions({ color: 0x6366f1, backgroundColor: 0x0a0e27 }); } } }); const mobileToggle = document.getElementById('mobileToggle'); const sidebar = document.getElementById('sidebar'); mobileToggle.addEventListener('click', () => { sidebar.classList.toggle('active'); if (sidebar.classList.contains('active')) { document.body.style.overflow = 'hidden'; document.body.classList.add('sidebar-open'); } else { document.body.style.overflow = ''; document.body.classList.remove('sidebar-open'); } }); const navLinks = document.querySelectorAll('.nav-item-custom'); navLinks.forEach(link => { link.addEventListener('click', () => { if (window.innerWidth <= 991) { sidebar.classList.remove('active'); document.body.style.overflow = ''; document.body.classList.remove('sidebar-open'); } }); }); document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }); }); document.querySelectorAll('.expertise-header').forEach(header => { header.addEventListener('click', function () { const dropdown = this.parentElement; const wasOpen = dropdown.classList.contains('open'); document.querySelectorAll('.expertise-dropdown').forEach(d => { d.classList.remove('open'); }); if (!wasOpen) { dropdown.classList.add('open'); } }); }); const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }; const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } }); }, observerOptions); document.querySelectorAll('.fade-in').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; observer.observe(el); }); const mobileObserverOptions = { threshold: 0.1, rootMargin: '0px' }; const mobileObserver = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting && window.innerWidth <= 991) { entry.target.classList.add('mobile-visible'); console.log('Right sidebar visible on mobile'); mobileObserver.unobserve(entry.target); } }); }, mobileObserverOptions); const rightSidebar = document.querySelector('.right-sidebar'); if (rightSidebar) { console.log('Right sidebar found, observing...'); mobileObserver.observe(rightSidebar); setTimeout(() => { if (window.innerWidth <= 991 && !rightSidebar.classList.contains('mobile-visible')) { console.log('Fallback trigger for mobile sidebar'); rightSidebar.classList.add('mobile-visible'); } }, 1000); } const projectObserver = new IntersectionObserver((entries) => { entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('project-visible'); }, index * 150); projectObserver.unobserve(entry.target); } }); }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' }); document.querySelectorAll('.expertise-item').forEach(item => { projectObserver.observe(item); });
 
 
 
@@ -87,37 +87,46 @@ let vantaNetEffect = null; let vantaRingsEffect = null; const savedTheme = local
 		const container = document.querySelector('.projects-carousel-track-container');
 		const containerWidth = container ? container.getBoundingClientRect().width : window.innerWidth;
 
-
-		if (!originalSlides.length) return;
-
-
-		const temp = originalSlides[0].cloneNode(true);
-		temp.style.visibility = 'hidden';
-		temp.style.position = 'absolute';
-
-		document.body.appendChild(temp);
-		const slideWidth = temp.offsetWidth;
-		document.body.removeChild(temp);
+		let slideWidth = containerWidth * 0.78;
+		if (window.innerWidth <= 1200) slideWidth = containerWidth * 0.8;
+		if (window.innerWidth <= 992) slideWidth = containerWidth * 0.92;
+		if (window.innerWidth <= 768) slideWidth = containerWidth * 0.98;
+		slideWidth = Math.min(Math.max(slideWidth, 360), 760);
 
 		const gap = parseFloat(window.getComputedStyle(track).gap) || 0;
-		visibleCount = Math.max(1, Math.floor(containerWidth / (slideWidth + gap)));
+		visibleCount = 1;
 
+		bufferSize = 5;
 
+		const createWrapper = (originalNode) => {
+			const wrapper = document.createElement('div');
+			wrapper.className = 'project-slide-wrapper';
+			wrapper.style.width = slideWidth + 'px';
+			wrapper.style.minWidth = slideWidth + 'px';
+			wrapper.style.display = 'flex';
+			wrapper.style.justifyContent = 'center';
+			wrapper.style.alignItems = 'center';
+			wrapper.style.padding = '0 4px';
 
-		bufferSize = Math.max(visibleCount * 3, 5);
+			const node = originalNode.cloneNode(true);
+			node.style.width = '100%';
+			node.style.maxWidth = '820px';
+			node.style.margin = '0 auto';
 
-
+			wrapper.appendChild(node);
+			return wrapper;
+		};
 
 		const prefix = [];
 		for (let i = 0; i < bufferSize; i++) {
-			prefix.unshift(originalSlides[originalSlides.length - 1 - (i % originalSlides.length)].cloneNode(true));
+			prefix.unshift(createWrapper(originalSlides[originalSlides.length - 1 - (i % originalSlides.length)]));
 		}
 
-		const middle = originalSlides.map(n => n.cloneNode(true));
+		const middle = originalSlides.map(n => createWrapper(n));
 
 		const suffix = [];
 		for (let i = 0; i < bufferSize; i++) {
-			suffix.push(originalSlides[i % originalSlides.length].cloneNode(true));
+			suffix.push(createWrapper(originalSlides[i % originalSlides.length]));
 		}
 
 		prefix.forEach(n => track.appendChild(n));
@@ -236,7 +245,7 @@ let vantaNetEffect = null; let vantaRingsEffect = null; const savedTheme = local
 	}
 
 
-	
+
 	let isDragging = false;
 	let startX = 0;
 	let startY = 0;
@@ -269,7 +278,7 @@ let vantaNetEffect = null; let vantaRingsEffect = null; const savedTheme = local
 		const diffX = Math.abs(currentX - initialTouch.x);
 		const diffY = Math.abs(currentY - initialTouch.y);
 
-		
+
 		if (diffX > diffY && diffX > 5) {
 			if (!isDragging) {
 				isDragging = true;
@@ -301,7 +310,7 @@ let vantaNetEffect = null; let vantaRingsEffect = null; const savedTheme = local
 
 			const movedBy = currentTranslate;
 
-			
+
 			if (movedBy < -50) {
 				currentIndex++;
 			} else if (movedBy > 50) {
@@ -319,14 +328,14 @@ let vantaNetEffect = null; let vantaRingsEffect = null; const savedTheme = local
 		setTimeout(() => startAutoplay(), 100);
 	}
 
-	
+
 	if (projectsContainer) {
 		projectsContainer.addEventListener('touchstart', touchStart, { passive: false });
 		projectsContainer.addEventListener('touchmove', touchMove, { passive: false });
 		projectsContainer.addEventListener('touchend', touchEnd);
 		projectsContainer.addEventListener('touchcancel', touchEnd);
 
-		
+
 		projectsContainer.addEventListener('mousedown', touchStart);
 		projectsContainer.addEventListener('mousemove', touchMove);
 		projectsContainer.addEventListener('mouseup', touchEnd);
@@ -377,12 +386,8 @@ let vantaNetEffect = null; let vantaRingsEffect = null; const savedTheme = local
 		const slideWidth = slides[0] ? slides[0].getBoundingClientRect().width : containerWidth;
 		const gap = getGap();
 
-		
-		if (window.innerWidth <= 991) {
-			visibleCount = 1;
-		} else {
-			visibleCount = Math.max(1, Math.floor((containerWidth + gap) / (slideWidth + gap)));
-		}
+
+		visibleCount = window.innerWidth <= 991 ? 1 : slides.length;
 
 		return { containerWidth, slideWidth, gap };
 	}
@@ -404,8 +409,13 @@ let vantaNetEffect = null; let vantaRingsEffect = null; const savedTheme = local
 	function update() {
 		if (!slides.length) return;
 		const { slideWidth, gap } = calcSizes();
-		const move = (slideWidth + gap) * current;
-		track.style.transform = `translateX(-${move}px)`;
+
+		if (visibleCount >= slides.length) {
+			track.style.transform = 'translateX(0)';
+		} else {
+			const move = (slideWidth + gap) * current;
+			track.style.transform = `translateX(-${move}px)`;
+		}
 
 		const dots = dotsWrap ? Array.from(dotsWrap.children) : [];
 		dots.forEach((d, i) => d.classList.toggle('active', i === current));
@@ -448,10 +458,10 @@ let vantaNetEffect = null; let vantaRingsEffect = null; const savedTheme = local
 
 		if (Math.abs(diff) > swipeThreshold) {
 			if (diff > 0) {
-			
+
 				next();
 			} else {
-			
+
 				prev();
 			}
 		}
@@ -480,9 +490,100 @@ let vantaNetEffect = null; let vantaRingsEffect = null; const savedTheme = local
 
 	calcSizes();
 	buildDots();
-	current = 0; 
+	current = 0;
 	update();
 	resetAutoplay();
+})();
+
+
+(function () {
+	const track = document.querySelector('.movies-track');
+	const container = document.querySelector('.movies-track-container');
+	if (!track || !container) return;
+
+	const slides = Array.from(track.children);
+	let current = 0;
+	let visibleCount = 1;
+	const MOVIE_TRANSITION = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
+
+	function getGap() {
+		const style = window.getComputedStyle(track);
+		return parseFloat(style.gap || style.columnGap) || 0;
+	}
+
+	function calcSizes() {
+		const containerWidth = container.clientWidth;
+		const gap = getGap();
+		visibleCount = window.innerWidth <= 991 ? 1 : slides.length;
+		const slideWidth = containerWidth;
+		return { slideWidth, gap };
+	}
+
+	function update() {
+		if (!slides.length) return;
+		const { slideWidth, gap } = calcSizes();
+		if (visibleCount >= slides.length) {
+			track.style.transform = 'translateX(0)';
+			track.style.transition = '';
+			return;
+		}
+		const move = (slideWidth + gap) * current;
+		track.style.transition = MOVIE_TRANSITION;
+		track.style.transform = `translateX(-${move}px)`;
+		slides.forEach((s, i) => s.classList.toggle('active', i === current));
+	}
+
+	function clamp() {
+		const pages = Math.max(1, slides.length - visibleCount + 1);
+		current = Math.min(Math.max(0, current), pages - 1);
+	}
+
+	function next() { const pages = Math.max(1, slides.length - visibleCount + 1); current = (current + 1) % pages; update(); }
+	function prev() { const pages = Math.max(1, slides.length - visibleCount + 1); current = (current - 1 + pages) % pages; update(); }
+
+	let isDragging = false;
+	let startX = 0;
+	let deltaX = 0;
+
+	function onStart(e) {
+		if (window.innerWidth > 991) return;
+		isDragging = true;
+		deltaX = 0;
+		startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+	}
+
+	function onMove(e) {
+		if (!isDragging) return;
+		const x = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+		deltaX = x - startX;
+		const { slideWidth, gap } = calcSizes();
+		const move = (slideWidth + gap) * current - deltaX;
+		track.style.transition = 'none';
+		track.style.transform = `translateX(-${move}px)`;
+	}
+
+	function onEnd() {
+		if (!isDragging) return;
+		track.style.transition = MOVIE_TRANSITION;
+		if (deltaX < -50) next();
+		else if (deltaX > 50) prev();
+		else update();
+		isDragging = false;
+		deltaX = 0;
+	}
+
+	container.addEventListener('touchstart', onStart, { passive: true });
+	container.addEventListener('touchmove', onMove, { passive: true });
+	container.addEventListener('touchend', onEnd, { passive: true });
+	container.addEventListener('touchcancel', onEnd, { passive: true });
+	container.addEventListener('mousedown', (e) => { onStart(e); });
+	container.addEventListener('mousemove', onMove);
+	container.addEventListener('mouseup', onEnd);
+	container.addEventListener('mouseleave', onEnd);
+
+	window.addEventListener('resize', () => { clamp(); update(); });
+	window.addEventListener('load', () => { clamp(); update(); });
+	update();
 })();
 
 
@@ -520,12 +621,12 @@ let vantaNetEffect = null; let vantaRingsEffect = null; const savedTheme = local
 
 	openBtn.addEventListener('click', openPopup);
 
-	
+
 	const openBtnMobile = document.getElementById('openMessengerBtnMobile');
 	if (openBtnMobile) {
 		openBtnMobile.addEventListener('click', () => {
 			openPopup();
-			
+
 			const sidebar = document.getElementById('sidebar');
 			if (sidebar && sidebar.classList.contains('active')) {
 				sidebar.classList.remove('active');
@@ -629,7 +730,7 @@ let vantaNetEffect = null; let vantaRingsEffect = null; const savedTheme = local
 
 		const now = Date.now();
 		if (now - lastMessageTime < RATE_LIMIT_MS) {
-			return; 
+			return;
 		}
 
 		if (isWaitingForResponse) return;
