@@ -3,46 +3,52 @@ document.addEventListener('DOMContentLoaded', async function () {
   const calendarEl = document.getElementById('github-calendar');
   if (!calendarEl) return;
 
+  const currentYear = new Date().getFullYear();
+  let selectedYear = 'last';
+
   function renderSkeleton() {
-    const skeleton = `
+    calendarEl.innerHTML = `
       <div class="contrib-header">Loading contributions...</div>
-      <div class="contrib-calendar">
-        <div class="contrib-months"></div>
-        <div class="contrib-days">
-          <span style="grid-row: 2;">Mon</span>
-          <span style="grid-row: 4;">Wed</span>
-          <span style="grid-row: 6;">Fri</span>
-        </div>
-        <div class="contrib-grid">${'<div class="contrib-week">' + '<div class="contrib-day empty"></div>'.repeat(7) + '</div>'.repeat(26)}</div>
-        <div class="contrib-legend">
-          <span>Less</span>
-          <div class="contrib-day level-0"></div>
-          <div class="contrib-day level-1"></div>
-          <div class="contrib-day level-2"></div>
-          <div class="contrib-day level-3"></div>
-          <div class="contrib-day level-4"></div>
-          <span>More</span>
-        </div>
-      </div>
+      <div class="contrib-calendar skeleton-loading"></div>
     `;
-    calendarEl.innerHTML = skeleton;
   }
 
-  function renderCalendar(data) {
+  function renderYearFilter(activeYear) {
+    const years = [];
+    // Dynamic years: Current year down to 2023
+    for (let y = currentYear; y >= 2023; y--) {
+      years.push(y);
+    }
+
+    let buttonsHtml = '<div class="contrib-years">';
+
+    // Add 'Last Year' option
+    buttonsHtml += `<button class="year-btn ${activeYear === 'last' ? 'active' : ''}" data-year="last">Last Year</button>`;
+
+    years.forEach(year => {
+      buttonsHtml += `<button class="year-btn ${activeYear === year.toString() ? 'active' : ''}" data-year="${year}">${year}</button>`;
+    });
+    buttonsHtml += '</div>';
+    return buttonsHtml;
+  }
+
+  function renderCalendar(data, year) {
     if (!data || !data.contributions) return;
 
-    const contributions = data.contributions.slice();
-    const totalContributions = data.total ? data.total[Object.keys(data.total)[0]] : 0;
+    // Use full data
+    const contributions = [...data.contributions].sort((a, b) => new Date(a.date) - new Date(b.date));
+    const totalContributions = data.total ? data.total[year === 'last' ? 'lastYear' : year] || data.total[Object.keys(data.total)[0]] : 0;
 
-    const lastDate = new Date(contributions[contributions.length - 1].date);
-    const today = new Date();
-    const endOfYear = new Date(today.getFullYear(), 11, 31);
-    let currentDate = new Date(lastDate);
-    currentDate.setDate(currentDate.getDate() + 1);
-    while (currentDate <= endOfYear) {
-      contributions.push({ date: currentDate.toISOString().split('T')[0], count: 0 });
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
+    const wrapperEl = calendarEl.closest('.github-calendar-wrapper');
+    const wrapperStyles = wrapperEl ? getComputedStyle(wrapperEl) : null;
+    const cellSize = wrapperStyles ? parseFloat(wrapperStyles.getPropertyValue('--contrib-cell-size')) : NaN;
+    const cellGap = wrapperStyles ? parseFloat(wrapperStyles.getPropertyValue('--contrib-cell-gap')) : NaN;
+    const cellStep = wrapperStyles ? parseFloat(wrapperStyles.getPropertyValue('--contrib-cell-step')) : NaN;
+    const offsetLeft = wrapperStyles ? parseFloat(wrapperStyles.getPropertyValue('--contrib-offset')) : NaN;
+    const weekStep = !Number.isNaN(cellStep)
+      ? cellStep
+      : (!Number.isNaN(cellSize) && !Number.isNaN(cellGap) ? cellSize + cellGap : 14.5);
+    const monthOffset = Number.isNaN(offsetLeft) ? 40 : offsetLeft;
 
     const weeks = [];
     let week = [];
@@ -55,7 +61,13 @@ document.addEventListener('DOMContentLoaded', async function () {
       }
     });
 
-    let html = `<div class="contrib-header">${(totalContributions || 0).toLocaleString()} contributions in the last year</div>`;
+    let html = renderYearFilter(year.toString());
+
+    html += `<div class="contrib-header">
+                ${(totalContributions || 0).toLocaleString()} contributions 
+                ${year === 'last' ? 'in the last year' : `in ${year}`}
+             </div>`;
+
     html += `<div class="contrib-calendar">`;
     html += `<div class="contrib-months">`;
     const monthPositions = {};
@@ -71,10 +83,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
     Object.keys(monthPositions).forEach(k => {
       const i = monthPositions[k];
-      const year = parseInt(k.split('-')[0], 10);
+      const yearVal = parseInt(k.split('-')[0], 10);
       const month = parseInt(k.split('-')[1], 10);
-      const label = new Date(year, month, 1).toLocaleDateString('en-US', { month: 'short' });
-      const left = i * 14.5;
+      const label = new Date(yearVal, month, 1).toLocaleDateString('en-US', { month: 'short' });
+      const left = monthOffset + i * weekStep;
       html += `<span style="left:${left}px">${label}</span>`;
     });
     html += `</div>`;
@@ -133,62 +145,55 @@ document.addEventListener('DOMContentLoaded', async function () {
     html += `</div>`; // .contrib-calendar
 
     calendarEl.innerHTML = html;
+
+    // Attach listener
+    calendarEl.querySelectorAll('.year-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const year = e.target.getAttribute('data-year');
+        if (year !== selectedYear) {
+          fetchData(year);
+        }
+      });
+    });
   }
 
-  const cacheKey = 'gh_contribs_' + username;
-  let cachedData = null;
+  async function fetchData(year) {
+    selectedYear = year;
+    const cacheKey = `gh_contribs_${username}_${year}`;
 
-  // 1. Try to load from cache first
-  try {
-    const cached = localStorage.getItem(cacheKey);
-    if (cached) {
-      const parsed = JSON.parse(cached);
-      // Valid if less than 12 hours old
-      if (parsed && parsed.ts && Date.now() - parsed.ts < 12 * 60 * 60 * 1000 && parsed.data) {
-        cachedData = parsed.data;
-        renderCalendar(cachedData);
-      }
+    // Simple loading indication if switching
+    if (calendarEl.querySelector('.contrib-grid')) {
+      calendarEl.querySelector('.contrib-grid').style.opacity = '0.5';
     }
-  } catch (e) {
-    console.warn('Cache read error', e);
-  }
 
-  // 2. If no cache was rendered, show skeleton
-  if (!cachedData) {
-    renderSkeleton();
-  }
-
-  // 3. Fetch fresh data regardless (to update in background or initial load)
-  // Delay slightly to prioritize main thread for other animations
-  setTimeout(async () => {
     try {
-      const resp = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`, { signal: AbortSignal.timeout(6000) });
-      if (!resp.ok) throw new Error('Network error');
-      const data = await resp.json();
-      if (!data || !data.contributions) throw new Error('No data');
-
-      // Check if we need to update
-      const needsUpdate = !cachedData || JSON.stringify(data) !== JSON.stringify(cachedData);
-
-      if (needsUpdate) {
-        console.log('GitHub contributions updated');
-        renderCalendar(data);
-        // Update cache
-        try {
-          localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data }));
-        } catch (e) { }
-      }
-    } catch (err) {
-      console.error('Error fetching GitHub contributions:', err);
-      // Only show error if we haven't shown anything yet
-      if (!cachedData) {
-        if (calendarEl.querySelector('.contrib-header')) {
-          calendarEl.querySelector('.contrib-header').textContent = 'Contributions unavailable (Network/API Error)';
-          calendarEl.querySelector('.contrib-header').style.color = '#ff6b6b';
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (parsed && parsed.ts && Date.now() - parsed.ts < 24 * 60 * 60 * 1000 && parsed.data) {
+          renderCalendar(parsed.data, year);
+          return;
         }
       }
+
+      const resp = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=${year}`);
+      if (!resp.ok) throw new Error('Network error');
+      const data = await resp.json();
+
+      renderCalendar(data, year);
+      localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data }));
+
+    } catch (err) {
+      console.error('Error fetching contributions:', err);
+      if (calendarEl.querySelector('.contrib-header')) {
+        calendarEl.querySelector('.contrib-header').textContent = 'Error loading data';
+        calendarEl.querySelector('.contrib-header').style.color = '#ff6b6b';
+      }
     }
-  }, cachedData ? 2000 : 0); // If we have cache, delay fetch longer. If not, fetch immediately (0ms delay but next tick).
+  }
+
+  // Initial load
+  fetchData('last');
 });
 
 
