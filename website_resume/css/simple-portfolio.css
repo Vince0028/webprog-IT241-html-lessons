@@ -11,7 +11,7 @@
     --resume-scale-35: 0.76;
     --resume-scale-65: 1.08;
     --resume-scale-end: 1.35;
-    --resume-translate-end: -12%;
+    --resume-translate-end: 0%;
 }
 
 body.dark-mode {
@@ -44,6 +44,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 32px 12px 64px;
+    margin: 0;
 }
 
 .page {
@@ -55,6 +56,7 @@ body {
     border-radius: 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
     position: relative;
+    overflow: visible !important;
 }
 
 .envelope-stage {
@@ -195,12 +197,16 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     backface-visibility: hidden;
+    overflow: hidden;
+    max-height: none;
 }
 
 .envelope-stage.opened .resume-card {
     pointer-events: auto;
     animation: paper-slide 1s ease-out forwards;
     animation-delay: 0.3s;
+    overflow: hidden !important;
+    max-height: none !important;
 }
 
 @keyframes paper-slide {
@@ -302,6 +308,14 @@ body.dark-mode .envelope-button {
         padding-top: 0px;
         overflow-x: hidden;
         width: 100%;
+        max-height: none;
+        overflow-y: visible;
+        min-height: 100vh;
+    }
+
+    .resume-card {
+        max-height: none;
+        overflow: hidden !important;
     }
 
     .envelope-visual {

@@ -24,6 +24,9 @@ const openEnvelope = () => {
     if (envelopeOpened) return;
     envelopeOpened = true;
     stage.classList.add('opened');
+    // Ensure only one scrollbar
+    document.documentElement.style.overflow = 'auto';
+    body.style.overflow = 'visible';
 };
 
 menuToggle?.addEventListener('click', (e) => {
