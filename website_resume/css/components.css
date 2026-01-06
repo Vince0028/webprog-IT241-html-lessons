@@ -1,4 +1,4 @@
-/* Profile Components */
+
 .profile-avatar {
     width: 100px;
     height: 100px;
@@ -28,7 +28,7 @@
     line-height: 1.4;
 }
 
-/* Nav Items */
+
 .nav-menu {
     margin-top: 2rem;
 }
@@ -62,7 +62,7 @@
     width: 24px;
 }
 
-/* Theme Toggle */
+
 .theme-toggle {
     margin-top: 2rem;
     text-align: center;
@@ -94,7 +94,7 @@
     transform: scale(1.05);
 }
 
-/* Skill Cards (Right Sidebar) */
+
 .skill-card-right {
     background: var(--card-bg);
     border: 2px solid var(--border-color);
@@ -129,7 +129,7 @@
     white-space: nowrap;
 }
 
-/* Right Sidebar Carousel */
+
 .carousel-wrapper-right {
     width: 100%;
     overflow: hidden;
@@ -165,7 +165,7 @@
     }
 }
 
-/* Expertise Dropdown */
+
 .expertise-dropdown {
     margin-bottom: 1rem;
 }
@@ -234,7 +234,7 @@
     line-height: 1.6;
 }
 
-/* Buttons */
+
 .mobile-toggle {
     display: none;
     position: fixed;
@@ -327,7 +327,7 @@ body.light-mode .btn-hero-outline {
     border-color: #1e293b;
 }
 
-/* Badges */
+
 .badge-honor {
     display: inline-block;
     background: #fbbf24;
@@ -443,7 +443,7 @@ body.light-mode .tech-badge:hover {
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
 }
 
-/* Social Links */
+
 .social-links {
     display: flex;
     gap: 1rem;

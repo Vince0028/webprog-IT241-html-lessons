@@ -4,6 +4,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 //You actually thought the api keys are here? lmao
 //You actually thought the api keys are here? lmao
 
+
 function detectLanguage(text) {
     const tagalogWords = [
         'ako', 'ikaw', 'siya', 'kami', 'kayo', 'sila', 'ang', 'ng', 'sa', 'mga', 'ay',
@@ -18,7 +19,7 @@ function detectLanguage(text) {
         'halimbawa', 'kaya', 'pero', 'kahit', 'kung', 'kapag', 'habang', 'dahil', 'upang',
         'napaka', 'sobra', 'medyo', 'halos', 'lalong', 'mas', 'pinaka', 'lubha', 'masyado'
     ];
-    
+
     const englishWords = [
         'the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'have', 'i', 'it', 'for',
         'not', 'on', 'with', 'he', 'as', 'you', 'do', 'at', 'this', 'but', 'his', 'by',
@@ -258,8 +259,8 @@ Show personality pero be concise.`
 
         if (useProvider === 'gemini' && genAI) {
             const geminiModel = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
-            const model = genAI.getGenerativeModel({ 
-                model: geminiModel, 
+            const model = genAI.getGenerativeModel({
+                model: geminiModel,
                 systemInstruction: systemPrompt,
                 generationConfig: {
                     temperature: 0.7,

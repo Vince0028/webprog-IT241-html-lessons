@@ -10,29 +10,29 @@ Would you like me to automatically clean up the spacing in your index.html and s
 
 User: fix it
 
-GitHub Copilot: Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/index.html#1-1), lines 1 to 80
+GitHub Copilot: Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/index.html#401-401), lines 401 to 500
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/index.html#301-301), lines 301 to 400
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/styles.css#1-1), lines 1 to 80
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/styles.css#701-701), lines 701 to 900
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/styles.css#401-401), lines 401 to 600
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/styles.css#201-201), lines 201 to 400
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/styles.css#81-81), lines 81 to 200
+Read [](file:
 
 Using "Apply Patch"
 
 Searched for text \`certificates-grid|section \` (\`**/styles.css\`), 16 results
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/styles.css#1129-1129), lines 1129 to 1149
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/styles.css#2715-2715), lines 2715 to 2735
+Read [](file:
 
 Using "Apply Patch"
 
@@ -46,25 +46,25 @@ Made changes.
 
 User: it should have the same amount of spacing like the other containers
 
-GitHub Copilot: Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/styles.css#1129-1129), lines 1129 to 1159
+GitHub Copilot: Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/styles.css#1-1), lines 1 to 40
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/styles.css#2179-2179), lines 2179 to 2199
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/styles.css#2400-2400), lines 2400 to 2420
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/index.html#281-281), lines 281 to 320
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/index.html#261-261), lines 261 to 280
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/index.html#221-221), lines 221 to 260
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/index.html#321-321), lines 321 to 340
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/index.html#341-341), lines 341 to 360
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/index.html#361-361), lines 361 to 380
+Read [](file:
 
 Using "Apply Patch"
 
@@ -145,9 +145,9 @@ User: hmm i think i have a great idea on the simple resume itself its on an enve
 
 GitHub Copilot: Created 4 todos
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/simple_portfolio.html#1-1), lines 1 to 200
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/simple_portfolio.html#200-200), lines 200 to 449
+Read [](file:
 
 Completed: *Review current simple resume UI* (1/4)
 
@@ -206,9 +206,9 @@ Using "Apply Patch"
 \`\`\`
 
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/simple_portfolio.html#250-250), lines 250 to 460
+Read [](file:
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/simple_portfolio.html#460-460), lines 460 to 662
+Read [](file:
 
 Using "Apply Patch"
 
@@ -218,7 +218,7 @@ Using "Apply Patch"
 \`\`\`
 
 
-Read [](file:///c%3A/Users/Vince/Documents/Alobin%20ICT241/website_resume/simple_portfolio.html#430-430), lines 430 to 659
+Read [](file:
 
 Envelope now holds the entire simple resume and opens with a more realistic brown-mailer effect:
 

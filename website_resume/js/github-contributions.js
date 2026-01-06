@@ -15,14 +15,14 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   function renderYearFilter(activeYear) {
     const years = [];
-    // Dynamic years: Current year down to 2023
+    
     for (let y = currentYear; y >= 2023; y--) {
       years.push(y);
     }
 
     let buttonsHtml = '<div class="contrib-years">';
 
-    // Add 'Last Year' option
+    
     buttonsHtml += `<button class="year-btn ${activeYear === 'last' ? 'active' : ''}" data-year="last">Last Year</button>`;
 
     years.forEach(year => {
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   function renderCalendar(data, year) {
     if (!data || !data.contributions) return;
 
-    // Use full data
+    
     const contributions = [...data.contributions].sort((a, b) => new Date(a.date) - new Date(b.date));
     const totalContributions = data.total ? data.total[year === 'last' ? 'lastYear' : year] || data.total[Object.keys(data.total)[0]] : 0;
 
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       }
       html += `</div>`;
     });
-    html += `</div>`; // .contrib-grid
+    html += `</div>`; 
 
     html += `<div class="contrib-legend">`;
     html += `<span>Less</span>`;
@@ -140,13 +140,13 @@ document.addEventListener('DOMContentLoaded', async function () {
     html += `<div class="contrib-day level-3"></div>`;
     html += `<div class="contrib-day level-4"></div>`;
     html += `<span>More</span>`;
-    html += `</div>`; // .contrib-legend
+    html += `</div>`; 
 
-    html += `</div>`; // .contrib-calendar
+    html += `</div>`; 
 
     calendarEl.innerHTML = html;
 
-    // Attach listener
+    
     calendarEl.querySelectorAll('.year-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const year = e.target.getAttribute('data-year');
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     selectedYear = year;
     const cacheKey = `gh_contribs_${username}_${year}`;
 
-    // Simple loading indication if switching
+    
     if (calendarEl.querySelector('.contrib-grid')) {
       calendarEl.querySelector('.contrib-grid').style.opacity = '0.5';
     }
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
   }
 
-  // Initial load
+  
   fetchData('last');
 });
 

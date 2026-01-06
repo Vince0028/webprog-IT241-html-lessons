@@ -6,7 +6,7 @@ const guestbookApp = Vue.createApp({
             visitorMessage: '',
             isSending: false,
             statusMessage: '',
-            statusType: '', // 'success' or 'error'
+            statusType: '', 
             messages: []
         }
     },
@@ -34,7 +34,7 @@ const guestbookApp = Vue.createApp({
                     throw new Error(result.error + (result.details ? ': ' + result.details : ''));
                 }
 
-                // Reset form
+                
                 this.visitorName = '';
                 this.visitorEmail = '';
                 this.visitorMessage = '';
@@ -52,7 +52,7 @@ const guestbookApp = Vue.createApp({
                 }
             } finally {
                 this.isSending = false;
-                // Clear status after 3 seconds
+                
                 setTimeout(() => {
                     this.statusMessage = '';
                 }, 3000);
